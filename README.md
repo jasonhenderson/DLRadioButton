@@ -46,6 +46,8 @@ Since release, it has became the most popular radio buttons control for iOS🎉.
 	
 ####To add raido buttons programmatically, please refer to example project.
 
+####To use it as checkbox, you can set multipleSelectionEnabled and iconSquare to YES
+
 ## Requirements
 
 ARC, iOS 6.0
