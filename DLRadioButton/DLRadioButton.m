@@ -135,7 +135,11 @@ static BOOL _groupModifing = NO;
 }
 
 - (void)touchUpInside {
-    [self setSelected:YES];
+    if (self.isMultipleSelectionEnabled) {
+        [self setSelected:!self.selected];
+    } else {
+        [self setSelected:YES];
+    }
 }
 
 - (void)initRadioButton {
@@ -218,10 +222,11 @@ static BOOL _groupModifing = NO;
 
 - (void)setSelected:(BOOL)selected {
     if ((self.isMultipleSelectionEnabled ||
-        (selected != self.isSelected &&
-        [self.icon.accessibilityIdentifier isEqualToString:kGeneratedIconName] &&
-        [self.iconSelected.accessibilityIdentifier isEqualToString:kGeneratedIconName])) &&
-        self.animationDuration > 0.0) {
+         (selected != self.isSelected &&
+          [self.icon.accessibilityIdentifier isEqualToString:kGeneratedIconName] &&
+          [self.iconSelected.accessibilityIdentifier isEqualToString:kGeneratedIconName])) &&
+        self.animationDuration > 0.0)
+    {
         CABasicAnimation *animation = [CABasicAnimation animationWithKeyPath:@"contents"];
         animation.duration = self.animationDuration;
         animation.fromValue = self.isSelected ? (id)self.iconSelected.CGImage : (id)self.icon.CGImage;
@@ -230,7 +235,7 @@ static BOOL _groupModifing = NO;
     }
     
     if (self.isMultipleSelectionEnabled) {
-        [super setSelected:!self.isSelected];
+        [super setSelected:selected];
     } else {
         [super setSelected:selected];
         if (selected) {
