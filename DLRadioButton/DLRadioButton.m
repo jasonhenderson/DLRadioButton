@@ -138,9 +138,10 @@ static BOOL _groupModifing = NO;
     if (self.isMultipleSelectionEnabled) {
         [self setSelected:!self.selected];
     } else {
-        [self setSelected:YES];
+        [self setSelected:!self.selected];
     }
-}
+    // JAH: This does not seem to work, period.
+    //[self setSelected:YES];}
 
 - (void)initRadioButton {
     _iconSize = kDefaultIconSize;
